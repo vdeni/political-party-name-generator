@@ -1,8 +1,5 @@
-using CSV
-using DataFrames
+using JSON
 
-names = CSV.read(joinpath("data",
-                          "clean",
-                          "stranke_imena.txt"),
-                 DataFrames.DataFrame;
-                 types = Vector)
+names = JSON.parsefile(joinpath("data",
+                                "clean",
+                                "stranke_imena.json"))
