@@ -1,5 +1,5 @@
-struct TransitionMatrix
-    transition_probs::Matrix{Int16}
+mutable struct TransitionMatrix
+    transition_probs::Matrix{Number}
     dimnames::Dict{String, Int16}
 
     function TransitionMatrix(;
@@ -34,6 +34,13 @@ function makeTransitionProbs(;
             end
         end
     end
+
+    N_total = Iterators.flatten(names_collection) |>
+        collect |>
+        length
+
+    transition_matrix.transition_probs = transition_matrix.transition_probs ./
+        N_total
 
     return transition_matrix
 end

@@ -1,1 +1,1 @@
-- [ ] calculate transition probabilities
+- [x] calculate transition probabilities
