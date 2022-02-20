@@ -16,5 +16,5 @@ unique_entries = unique(unique_entries)
 party_names = collect(Vector{String},
                       values(party_names))
 
-makeTransitionProbs(names_collection = party_names,
-                    unique_elems = unique_entries)
+transition_matrix = makeTransitionProbs(names_collection = party_names,
+                                        unique_elems = unique_entries)
