@@ -17,9 +17,9 @@ mutable struct TransitionMatrix
     end
 end
 
-function makeTransitionProbs(;
-                             names_collection::Vector{Vector{String}},
-                             unique_elems::Vector{String})
+function makeTransitionMatrix(;
+                              names_collection::Vector{Vector{String}},
+                              unique_elems::Vector{String})
     transition_matrix = TransitionMatrix(dimnames = unique_elems)
 
     for name in names_collection
