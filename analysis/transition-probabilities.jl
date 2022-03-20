@@ -8,13 +8,8 @@ party_names = JSON.parsefile(joinpath("data",
                                       "stranke_imena.json"))
 
 # extract unique words and named entities from party names
-unique_entries = collect(Iterators.flatten(values(party_names)))
-
-unique_entries = unique(unique_entries)
-
 # extract party names to vector
 party_names = collect(Vector{String},
                       values(party_names))
 
-transition_matrix = makeTransitionMatrix(names_collection = party_names,
-                                         unique_elems = unique_entries)
+transition_matrix = makeTransitionMatrix(party_names)
