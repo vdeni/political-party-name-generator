@@ -1,4 +1,5 @@
 using JSON
+using DataStructures
 
 include(joinpath("helpers",
                  "transition-probabilities_h.jl"))

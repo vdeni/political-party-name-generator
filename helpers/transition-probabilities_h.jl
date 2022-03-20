@@ -31,15 +31,20 @@ makeTransitionMatrix(;
                      unique_elems::Vector{String}) => TransitionMatrix
 ```
 
-This function takes a vector containing vectors of strings (i.e. each sentence/\
-entry is represented by a vector of words) and returns a transition probability\
-matrix for all entries.
+This function takes a vector containing vectors of strings (i.e. each sentence\
+is represented by a vector of words) and returns a transition probability\
+matrix for all tokens.
 
 - `names_collection`: a vector of vectors of strings. E.g. [['A', 'sentence']]
 """
 function makeTransitionMatrix(names_collection::Vector{Vector{String}})
+    # flatten vector of vector of strings to vector of strings
     unique_elems = collect(Iterators.flatten(values(names_collection)))
 
+    # count number of occurences of each string
+    counts = DataStructures.counter(unique_elems)
+
+    # extract unique elements
     unique_elems = unique(unique_elems)
 
     transition_matrix = TransitionMatrix(dimnames = unique_elems)
@@ -52,17 +57,11 @@ function makeTransitionMatrix(names_collection::Vector{Vector{String}})
                 idx_row = transition_matrix.dimnames[name[i - 1]]
                 idx_col = transition_matrix.dimnames[elem]
 
-                transition_matrix.transition_probs[idx_row, idx_col] += 1
+                transition_matrix.transition_probs[idx_row, idx_col] += 1 /
+                    counts[name[i - 1]]
             end
         end
     end
-
-    N_total = Iterators.flatten(names_collection) |>
-        collect |>
-        length
-
-    transition_matrix.transition_probs = transition_matrix.transition_probs ./
-        N_total
 
     return transition_matrix
 end
