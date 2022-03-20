@@ -1,1 +1,1 @@
-- [x] calculate transition probabilities
+- [ ] calculate transition probabilities (rowsums = 1)

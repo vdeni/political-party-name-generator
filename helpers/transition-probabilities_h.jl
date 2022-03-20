@@ -1,3 +1,10 @@
+"""
+Object for storing a transition probability matrix.
+- `transition_probs`: component holds the transition probabilities in in\
+Matrix form.
+- `dimnames`: a dictionary with dimension names as keys, and matrix row\
+and column indices as values.
+"""
 mutable struct TransitionMatrix
     transition_probs::Matrix{Number}
     dimnames::Dict{String, Int16}
@@ -17,6 +24,21 @@ mutable struct TransitionMatrix
     end
 end
 
+"""
+```
+makeTransitionMatrix(;
+                     names_collection::Vector{Vector{String}},
+                     unique_elems::Vector{String}) => TransitionMatrix
+```
+
+This function takes a vector containing vectors of strings (i.e. each sentence/\
+entry is represented by a vector of words) and returns a transition probability\
+matrix for all entries.
+
+- `names_collection`: a vector of vectors of strings. E.g. [['A', 'sentence']]
+- `unique_elems`: vector of strings containing the unique elements (tokens)\
+that appear in all of the elements of the `names_collection` vector.
+"""
 function makeTransitionMatrix(;
                               names_collection::Vector{Vector{String}},
                               unique_elems::Vector{String})
