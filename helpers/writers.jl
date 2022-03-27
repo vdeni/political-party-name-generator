@@ -1,16 +1,13 @@
 """
 ```
-gatherWordInfo(transition_matrix::TransitionMatrix,
-               initial_probs::Dict{String, Float64}) =>
+gatherWordInfo(transition_matrix::TransitionMatrix) =>
                    Dict{String, Dict{String, Any}}}
 ```
-Bind transition probabilities and initial probabilities into single Dict ready
-for JSON dump.
+Create `Dict` with nonzero transition probabilities for each word
 """
-function gatherWordInfo(transition_matrix::TransitionMatrix,
-                        initial_probs::Dict{String, Float64})
+function gatherWordInfo(transition_matrix::TransitionMatrix)
 
-    out_dict = Dict{String, Dict{String, Any}}()
+    out_dict = Dict{String, Dict{String, Float64}}()
 
     for word in keys(transition_matrix.dimnames)
         # indices of non-zero elements
@@ -34,14 +31,7 @@ function gatherWordInfo(transition_matrix::TransitionMatrix,
             end
         end
 
-        if !(word in keys(initial_probs))
-            initial_probs_out = 0
-        else
-            initial_probs_out = initial_probs[word]
-        end
-        
-        out_dict[word] = Dict("transition_probs" => transition_ps,
-                              "initial_prob" => initial_probs_out)
+        out_dict[word] = transition_ps
     end
 
     return out_dict

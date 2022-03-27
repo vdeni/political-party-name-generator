@@ -1,2 +1,3 @@
 - [x] calculate transition probabilities (rowsums = 1)
 - [x] write probabilities to JSON
+- [ ] make party generating script

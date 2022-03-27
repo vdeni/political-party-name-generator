@@ -9,7 +9,8 @@ DATA_RAW=data/raw
 all:\
 	$(DATA_RAW)/stranke_ogranci.csv\
 	$(DATA_CLEAN)/stranke_imena.json\
-	analysis/transitions.json
+	analysis/transition-probs.json\
+	analysis/initial-probs.json
 
 # >>>>> concrete
 
@@ -22,7 +23,7 @@ $(DATA_CLEAN)/stranke_imena.json:\
 	$(DATA_RAW)/stranke_ogranci.csv
 	pipenv run python $<
 
-analysis/transitions.json:\
+analysis/transition-probs.json analysis/initial-probs.json:\
 	analysis/token-probabilities.jl\
 	helpers/*.jl
 	julia $<

@@ -23,17 +23,24 @@ party_names = JSON.parsefile(joinpath("data",
 party_names = collect(Vector{String},
                       values(party_names))
 
+# get transition probabilities
 transition_matrix = makeTransitionMatrix(party_names)
 
-initial_probabilities = getInitialProbabilities(party_names)
+transition_probs = gatherWordInfo(transition_matrix)
 
-gathered_probs = gatherWordInfo(transition_matrix,
-                                initial_probabilities)
-
-# write to JSON
 open(joinpath("analysis",
-              "transitions.json"),
+              "transition-probs.json"),
      "w") do outfile
     write(outfile,
-          JSON.json(gathered_probs))
+          JSON.json(transition_probs))
+end
+
+# get initial probabilities
+initial_probabilities = getInitialProbabilities(party_names)
+
+open(joinpath("analysis",
+              "initial-probs.json"),
+     "w") do outfile
+    write(outfile,
+          JSON.json(initial_probabilities))
 end
