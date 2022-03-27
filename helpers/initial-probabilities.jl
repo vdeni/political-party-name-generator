@@ -1,6 +1,7 @@
 """
 ```
-getInitialProbabilities(names_collection::Vector{Vector{String}})
+getInitialProbabilities(names_collection::Vector{Vector{String}}) =>
+    Dict{String, Float64}
 ```
 Get initial probabilities by counting how often each word appear as the first
 word of a political party name.
