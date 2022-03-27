@@ -1,13 +1,18 @@
+using Pkg
+Pkg.activate(".")
 using JSON
 using DataStructures
 
-include(joinpath("helpers",
+include(joinpath("..",
+                 "helpers",
                  "transition-probabilities.jl"))
 
-include(joinpath("helpers",
+include(joinpath("..",
+                 "helpers",
                  "initial-probabilities.jl"))
 
-include(joinpath("helpers",
+include(joinpath("..",
+                 "helpers",
                  "writers.jl"))
 
 party_names = JSON.parsefile(joinpath("data",
@@ -24,3 +29,11 @@ initial_probabilities = getInitialProbabilities(party_names)
 
 gathered_probs = gatherWordInfo(transition_matrix,
                                 initial_probabilities)
+
+# write to JSON
+open(joinpath("analysis",
+              "transitions.json"),
+     "w") do outfile
+    write(outfile,
+          JSON.json(gathered_probs))
+end

@@ -8,7 +8,8 @@ DATA_RAW=data/raw
 # >>>>> abstract
 all:\
 	$(DATA_RAW)/stranke_ogranci.csv\
-	$(DATA_CLEAN)/stranke_imena.json
+	$(DATA_CLEAN)/stranke_imena.json\
+	analysis/transitions.json
 
 # >>>>> concrete
 
@@ -20,3 +21,8 @@ $(DATA_CLEAN)/stranke_imena.json:\
 	wrangling/extract-words.py\
 	$(DATA_RAW)/stranke_ogranci.csv
 	pipenv run python $<
+
+analysis/transitions.json:\
+	analysis/token-probabilities.jl\
+	helpers/*.jl
+	julia $<

@@ -1,1 +1,2 @@
 - [x] calculate transition probabilities (rowsums = 1)
+- [x] write probabilities to JSON
