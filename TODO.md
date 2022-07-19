@@ -1,3 +1,6 @@
+- [ ] extract name patterns using classla
+- [ ] collect lexicons for populating syntax patterns
+- [ ] make Flask app for generating party names
 - [x] calculate transition probabilities (rowsums = 1)
 - [x] write probabilities to JSON
-- [ ] make party generating script
+- [x] make party generating script

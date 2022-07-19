@@ -7,7 +7,7 @@ import os
 import pandas
 
 d = pandas.read_csv(os.path.join('data',
-                                 'raw',
+                                 'party-names_raw',
                                  'stranke_ogranci.csv'),
                     sep=';')
 
@@ -26,5 +26,5 @@ imena = imena.map(str.upper)
 imena = imena.map(str.split)
 
 imena.to_json(os.path.join('data',
-                           'clean',
+                           'party-names_clean',
                            'stranke_imena.json'))

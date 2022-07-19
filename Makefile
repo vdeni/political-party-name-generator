@@ -1,29 +1,33 @@
 # variables
 
-DATA_CLEAN=data/clean
-DATA_RAW=data/raw
+PARTY_DATA_CLEAN=data/party-names_clean
+PARTY_DATA_RAW=data/party-names_raw
+
+TRANSITION_PROBABILITIES_DATA=data/transition-probabilities
 
 # recipes
 
 # >>>>> abstract
 all:\
-	$(DATA_RAW)/stranke_ogranci.csv\
-	$(DATA_CLEAN)/stranke_imena.json\
-	analysis/transition-probs.json\
-	analysis/initial-probs.json
+	$(PARTY_DATA_RAW)/stranke_ogranci.csv\
+	$(PARTY_DATA_CLEAN)/stranke_imena.json\
+	$(TRANSITION_PROBABILITIES_DATA)/transition-probs.json\
+	$(TRANSITION_PROBABILITIES_DATA)/initial-probs.json
 
 # >>>>> concrete
 
 $(DATA_RAW)/stranke_ogranci.csv:
+	mkdir -p $(PARTY_DATA_RAW)
 	curl https://mpu.gov.hr/UserDocsImages//dokumenti/Otvoreni%20podaci//ExportPolitickeStrankeOgranci08.05.2021-06_00.csv\
 		-o $@
 
 $(DATA_CLEAN)/stranke_imena.json:\
 	wrangling/extract-words.py\
-	$(DATA_RAW)/stranke_ogranci.csv
+	$(PARTY_DATA_RAW)/stranke_ogranci.csv
 	pipenv run python $<
 
-analysis/transition-probs.json analysis/initial-probs.json:\
+$(TRANSITION_PROBABILITIES_DATA)/transition-probs.json\
+$(TRANSITION_PROBABILITIES_DATA)/initial-probs.json:\
 	analysis/token-probabilities.jl\
 	helpers/*.jl
 	julia $<

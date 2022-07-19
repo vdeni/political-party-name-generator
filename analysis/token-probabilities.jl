@@ -15,7 +15,7 @@ include(joinpath("..",
                  "writers.jl"))
 
 party_names = JSON.parsefile(joinpath("data",
-                                      "clean",
+                                      "party-names_clean",
                                       "stranke_imena.json"))
 
 # extract party names to vector
@@ -27,7 +27,8 @@ transition_matrix = makeTransitionMatrix(party_names)
 
 transition_probs = gatherWordInfo(transition_matrix)
 
-open(joinpath("analysis",
+open(joinpath("data",
+              "transition-probabilities",
               "transition-probs.json"),
      "w") do outfile
     write(outfile,
@@ -37,7 +38,8 @@ end
 # get initial probabilities
 initial_probabilities = getInitialProbabilities(party_names)
 
-open(joinpath("analysis",
+open(joinpath("data",
+              "transition-probabilities",
               "initial-probs.json"),
      "w") do outfile
     write(outfile,
