@@ -35,7 +35,14 @@ This function takes a vector containing vectors of strings (i.e. each sentence\
 is represented by a vector of words) and returns a transition probability\
 matrix for all tokens.
 
-- `names_collection`: a vector of vectors of strings. E.g. [['A', 'sentence']]
+Parameters:
+    - `names_collection`: a `Vector` of `Vectors` of `Strings` holding
+    the party names to be analysed E.g. [['A', 'sentence']]
+    - `unique_elems`: a `Vector` of `String`s holding the unique words
+    appearing in the party names.
+
+Returns:
+    - `TransitionMatrix` object
 """
 function makeTransitionMatrix(names_collection::Vector{Vector{String}})
     # flatten vector of vector of strings to vector of strings

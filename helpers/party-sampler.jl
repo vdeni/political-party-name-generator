@@ -1,5 +1,20 @@
+using StatsBase
+
 """
+```
+function makePartyName(transition_probs::Dict{String, Any},
+                       initial_probs::Dict{String, Any}) => String
+```
 Generate a party name.
+
+Parameters:
+    - `transition_probs`: Dictionary containing the probability of transitioning
+    from a string given as a key to any other string present in the transition
+    matrix.
+    - `initial_probs`: Initial probability for each string, i.e. the probability
+    that the string will appear as the first string in the party name.
+
+Returns: a `String` representing a generated party name.
 """
 function makePartyName(transition_probs::Dict{String, Any},
                        initial_probs::Dict{String, Any})

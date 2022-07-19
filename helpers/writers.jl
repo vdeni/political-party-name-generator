@@ -4,6 +4,15 @@ gatherWordInfo(transition_matrix::TransitionMatrix) =>
                    Dict{String, Dict{String, Any}}}
 ```
 Create `Dict` with nonzero transition probabilities for each word
+
+Parameters:
+    - `transition_matrix`: a `TransitionMatrix` holding the transition
+    probabilities and strings.
+
+Returns:
+    - A dictionary with a string taken from the party name as key, and
+    having as values dictionaries that contain each other word present in the
+    dataset, with the corresponding transition probability.
 """
 function gatherWordInfo(transition_matrix::TransitionMatrix)
 

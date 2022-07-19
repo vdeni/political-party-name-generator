@@ -1,7 +1,6 @@
 using Pkg
 Pkg.activate(".")
 using JSON
-using DataStructures
 
 include(joinpath("..",
                  "helpers",

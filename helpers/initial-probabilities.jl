@@ -1,3 +1,5 @@
+using DataStructures
+
 """
 ```
 getInitialProbabilities(names_collection::Vector{Vector{String}}) =>
@@ -6,7 +8,13 @@ getInitialProbabilities(names_collection::Vector{Vector{String}}) =>
 Get initial probabilities by counting how often each word appear as the first
 word of a political party name.
 
-- `names_collection`: a vector of vectors of strings. E.g. [['A', 'sentence']]
+Parameters:
+    - `names_collection`: a `Vector` of `Vector`s of `String`s.
+    E.g. [['A', 'sentence']]
+
+Returns:
+    - `Dict` of `String`s and `Float64`s holding the probability of choosing
+    each string as the first word in the party name to be generated.
 """
 function getInitialProbabilities(names_collection::Vector{Vector{String}})
     initials = []
