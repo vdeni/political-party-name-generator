@@ -1,11 +1,13 @@
 using StatsBase
+using DataFrames
 
 """
 ```
 function makePartyName(transition_probs::Dict{String, Any},
                        initial_probs::Dict{String, Any}) => String
 ```
-Generate a party name.
+Generate a party name from transition probability matrix and a set of
+initial probabilities.
 
 Parameters:
     - `transition_probs`: Dictionary containing the probability of transitioning
@@ -50,4 +52,38 @@ function makePartyName(transition_probs::Dict{String, Any},
 
     return join(party_name,
                 " ")
+end
+
+"""
+```
+function makePartyName(syntactic_patterns::Vector{String},
+                       morphological_lexicon::DataFrames.DataFrame) => String
+```
+Generate a party name using syntactic patterns and a lexicon.
+
+Parameters:
+    - `syntactic_patterns`: A `Vector` of syntactic patterns represented
+    as `String`s which hold comma-separated part-of-speech tags. One is chosen
+    at random to construct a party name.
+    - `morphological_lexicon`: A `DataFrame` holding morphological forms,
+    lemmas, and their part-of-speech tags.
+
+Returns: a `String` representing a generated party name.
+"""
+function makePartyName(syntactic_patterns::Vector{String},
+                       morphological_lexicon::DataFrames.DataFrame)
+    pattern = rand(syntactic_patterns)
+    pattern = split(pattern,
+                    ",")
+
+    out_elems = fill(missing
+                     length(pattern))
+
+    for idx, postag in enumerate(pattern)
+        out_elems[idx] = DataFrames.subset(morphological_lexicon,
+                                           :postag => x -> x .== postag;
+                                           view = true) |>
+                eachrow |>
+                rand |>
+                x -> x.morph_form
 end

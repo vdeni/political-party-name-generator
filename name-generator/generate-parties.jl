@@ -1,17 +1,21 @@
 using Pkg
 Pkg.activate(".")
-using JSON
+using DataFrames
+using CSV
 
 include(joinpath("helpers",
                  "party-sampler.jl"))
 
-transition_probs = JSON.parsefile(joinpath("data",
-                                           "transition-probabilities",
-                                           "transition-probs.json"))
+syntactic_patterns = readlines(joinpath("data",
+                                        "syntactic-patterns",
+                                        "syntactic-patterns.txt"))
 
-initial_probs = JSON.parsefile(joinpath("data",
-                                        "transition-probabilities",
-                                        "initial-probs.json"))
+morphological_lexicon = CSV.read(joinpath("data",
+                                          "croatian-morphological-lexicon",
+                                          "clean",
+                                          "morphological-lexicon.csv"),
+                                 DataFrames.DataFrame;
+                                 header = ["morph_form", "lemma", "postag"])
 
 for i in 1:20
     makePartyName(transition_probs,
