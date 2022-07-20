@@ -44,7 +44,7 @@ $(SYNT_PATTRS_DIR)/syntactic-patterns.txt:\
 	pipenv run python $<
 
 $(MORPH_LEXICON_DIR)/clean/morphological-lexicon.csv:\
-	$(MORPH_LEXICON_DIR)/raw/hml_50_metashare_v2.txt
+	$(MORPH_LEXICON_DIR)/raw/hml_50_metashare_v2.txt\
 	mkdir -p $(@D)
 	sed -Ee 's/\s/,/g' $< > $@
 	sed -i -Ee 's/,$$//' $@

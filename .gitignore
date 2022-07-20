@@ -19,3 +19,4 @@ docs/site/
 
 data/raw/
 data/croatian-morphological-lexicon/
+**/**/*pycache*
