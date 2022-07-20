@@ -43,8 +43,10 @@ $(SYNT_PATTRS_DIR)/syntactic-patterns.txt:\
 	mkdir -p $(SYNT_PATTRS_DIR)
 	pipenv run python $<
 
-$(MORPH_LEXICON_DIR)/clean/morphological-lexicon.csv:\
-	$(MORPH_LEXICON_DIR)/raw/hml_50_metashare_v2.txt\
+$(MORPH_LEXICON_DIR)/clean/morphological-lexicon.txt:\
+	$(MORPH_LEXICON_DIR)/raw/hrLex_v1.3.tab\
+	wrangling/filter-morph-lexicon.py
 	mkdir -p $(@D)
-	sed -Ee 's/\s/,/g' $< > $@
-	sed -i -Ee 's/,$$//' $@
+	sed -Ee 's/\s/<SEP>/g' $< > $@
+	sed -i -Ee 's/<SEP>$$//' $@
+	pipenv run python wrangling/filter-morph-lexicon.py
