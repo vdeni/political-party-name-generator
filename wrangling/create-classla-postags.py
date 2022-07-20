@@ -37,4 +37,14 @@ words = morphological_lexicon.form.to_list()[0:1000]
 
 docs = [nlp(word) for word in words]
 
-print(f'Done: {docs[0]}')
+doc_text = [doc.get('text') for doc in docs]
+doc_postags = [doc.get('xpos') for doc in docs]
+
+doc_text = [text for doc in doc_text for text in doc]
+doc_postags = [postag for doc in doc_postags for postag in doc]
+
+df_out = pandas.DataFrame(zip(doc_text, doc_postags),
+                          columns=['form', 'postag'])
+
+df_out.to_csv(filename + '.csv',
+              index=False)
