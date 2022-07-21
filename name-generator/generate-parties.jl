@@ -13,11 +13,12 @@ syntactic_patterns = readlines(joinpath("data",
 morphological_lexicon = CSV.read(joinpath("data",
                                           "croatian-morphological-lexicon",
                                           "clean",
-                                          "morphological-lexicon.csv"),
+                                          "morphological-lexicon.txt"),
                                  DataFrames.DataFrame;
-                                 header = ["morph_form", "lemma", "postag"])
+                                 delim = "|")
 
 for i in 1:20
-    makePartyName(transition_probs,
-                  initial_probs) |> println
+    makePartyName(syntactic_patterns,
+                  morphological_lexicon) |>
+        println
 end

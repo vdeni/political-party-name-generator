@@ -45,6 +45,7 @@ $(SYNT_PATTRS_DIR)/syntactic-patterns.txt:\
 
 $(MORPH_LEXICON_DIR)/clean/morphological-lexicon.txt:\
 	$(MORPH_LEXICON_DIR)/raw/hrLex_v1.3.tab\
+	$(SYNT_PATTRS_DIR)/syntactic-patterns.txt\
 	wrangling/filter-morph-lexicon.py
 	mkdir -p $(@D)
 	sed -Ee 's/\s/<SEP>/g' $< > $@

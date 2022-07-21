@@ -76,14 +76,20 @@ function makePartyName(syntactic_patterns::Vector{String},
     pattern = split(pattern,
                     ",")
 
-    out_elems = fill(missing
-                     length(pattern))
+    out_elems = Vector()
 
-    for idx, postag in enumerate(pattern)
-        out_elems[idx] = DataFrames.subset(morphological_lexicon,
-                                           :postag => x -> x .== postag;
+    for postag in pattern
+        word = DataFrames.subset(morphological_lexicon,
+                                           :msd => x -> x .== postag;
                                            view = true) |>
                 eachrow |>
                 rand |>
-                x -> x.morph_form
+                x -> x.wordform
+
+        append!(out_elems,
+                [word])
+    end
+
+    return join(out_elems,
+                " ")
 end
