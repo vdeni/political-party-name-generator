@@ -80,8 +80,8 @@ function makePartyName(syntactic_patterns::Vector{String},
 
     for postag in pattern
         word = DataFrames.subset(morphological_lexicon,
-                                           :msd => x -> x .== postag;
-                                           view = true) |>
+                                 :msd => x -> x .== postag;
+                                 view = true) |>
                 eachrow |>
                 rand |>
                 x -> x.wordform

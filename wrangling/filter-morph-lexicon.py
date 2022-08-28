@@ -31,7 +31,14 @@ syntactic_patterns = data_loaders.load_syntactic_patterns()
 syntactic_patterns_set = set([pattr for pattr_combo in syntactic_patterns
                               for pattr in pattr_combo])
 
-morphological_lexicon.query('msd.isin(@syntactic_patterns_set)')
+morphological_lexicon = morphological_lexicon.\
+    query('msd.isin(@syntactic_patterns_set)')
+
+morphological_lexicon = morphological_lexicon.\
+    query("""
+          wordform not in ['!', '?', '"', "'", '(', ')',\
+                           ',', '.', ';', ':']
+          """)
 
 morphological_lexicon.to_csv(os.path.join('data',
                                           'croatian-morphological-lexicon',

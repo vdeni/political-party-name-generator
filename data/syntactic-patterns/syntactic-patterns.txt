@@ -41,7 +41,6 @@ Ncfsn,Sa,Npfsa
 Agpfsny,Agpfsny,Ncfsn,Npfsg,Npmsn
 Rgp,Npfsn,Z,Ncmsn,Sa,Npfsa
 Agpfsny,Ncfsn,Ncmsg
-Agpfsny,Ncfsn,Ncnsg,Y,Npmsn,Npmsn
 Ncfsn,Agpnsgy,Ncnsg
 Agpmpny,Ncmpn,Z,Ncfsn,Npmsg
 Ncmsn,Appmpny,Rgp

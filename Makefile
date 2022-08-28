@@ -17,7 +17,8 @@ all:\
 	$(PARTY_DATA_CLEAN)/stranke_imena.json\
 	$(TRANSITION_PROBS_DATA)/transition-probs.json\
 	$(TRANSITION_PROBS_DATA)/initial-probs.json\
-	$(SYNT_PATTRS_DIR)/syntactic-patterns.txt
+	$(SYNT_PATTRS_DIR)/syntactic-patterns.txt\
+	$(MORPH_LEXICON_DIR)/clean/morphological-lexicon.txt
 
 # >>>>> concrete
 

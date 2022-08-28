@@ -5,8 +5,6 @@ import pandas
 import classla
 
 # prepare classla
-classla.download('hr')
-
 nlp = classla.Pipeline('hr',
                        processors='tokenize,pos')
 
@@ -33,12 +31,16 @@ for doc in docs_pos:
     if doc not in docs_pos_unique:
         docs_pos_unique.append(doc)
 
-# filter out patterns containing X POS tags
-docs_pos_unique = [doc for doc in docs_pos_unique if 'Xf' not in doc]
+# filter out patterns containing X and Y POS tags
+docs_filtered = list()
+
+for doc in docs_pos_unique:
+    if not any([postag in ['Xf', 'Y'] for postag in doc]):
+        docs_filtered.append(doc)
 
 # write to file
 with open(os.path.join('data',
                        'syntactic-patterns',
                        'syntactic-patterns.txt'), 'w') as ofile:
-    for doc in docs_pos_unique:
+    for doc in docs_filtered:
         ofile.write(','.join(doc) + '\n')
