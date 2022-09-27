@@ -77,21 +77,24 @@ function makePartyName(syntactic_patterns::Vector{String},
 
     pattern = rand(syntactic_patterns)
 
-    pattern = split(pattern,
-        ",")
+    pattern = split(pattern, ",")
 
     out_elems = Vector()
 
-    for postag in pattern
-        if startswith(postag, "M")
+    for elem in pattern
+        if startswith(elem, "M")
             word = Random.rand(1:5_000)
+        elseif elem == "Z"
+            word = "-"
+        elseif !isnothing(match(r"^[[:upper:]]+$", elem))
+            word = elem
         else
             word = DataFrames.subset(morphological_lexicon,
-                       :msd => x -> x .== postag;
+                       :msd => x -> x .== elem;
                        view=true) |>
                    eachrow |>
                    rand |>
-                   x -> x.wordform
+                   x -> uppercase(x.wordform)
         end
 
         append!(out_elems,
