@@ -4,6 +4,6 @@
 - [x] calculate transition probabilities (rowsums = 1)
 - [x] write probabilities to JSON
 - [x] make party generating script
-- [ ] force more frequent usage of terms like 'stranka' ('political party'),
+- [x] force more frequent usage of terms like 'stranka' ('political party'),
     'zajednica' etc. try probabilistically seeding the terms through the
     patterns
